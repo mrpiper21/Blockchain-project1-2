@@ -1,11 +1,17 @@
 // const { keccak256 } = require('ethereum-cryptography/keccak');
 import { keccak256 } from 'ethereum-cryptography/keccak.js';
 import {hexToBytes, bytesToHex} from 'ethereum-cryptography/utils.js'
-const concat = (left, right) => keccak256(Buffer.concat([left, right]));
+const concat = (left: Uint8Array, right: Uint8Array) =>
+	keccak256(Buffer.concat([left, right]));
 
-function verifyProof(proof, leaf, root) {
-	console.log(proof)
-	let data = keccak256(Buffer.from(leaf));
+type IProof = {
+	data: string;
+	left: boolean;
+};
+
+function verifyProof(proof: IProof[], leaf, root) {
+	console.log(proof);
+	let data: Uint8Array = keccak256(Buffer.from(leaf));
 
 	for (let i = 0; i < proof.length; i++) {
 		if (proof[i].left) {
