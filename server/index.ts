@@ -12,6 +12,8 @@ app.use(express.json());
 const merkleTree = new MerkleTree(niceList);
 const MERKLE_ROOT = merkleTree.getRoot();
 
+//#TODO: CONFIGURE SERVER TO CONVERT UNITARRAY8 to STRING TO BE ABLE TO RECIEVE REQUEST FROM THE WEB
+
 app.post("/gift", (req, res) => {
   // Extract name from request body
   const { name } = req.body;
